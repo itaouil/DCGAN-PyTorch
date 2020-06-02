@@ -3,7 +3,7 @@ import torchvision.transforms as transforms
 import torchvision.datasets as dset
 
 # Directory containing the data.
-root = 'data/'
+root = '/home/ubuntu/CIFAR-10-images/train/data1'
 
 def get_celeba(params):
     """

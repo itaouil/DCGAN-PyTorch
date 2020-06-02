@@ -10,7 +10,7 @@ import random
 from dcgan import Generator
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-load_path', default='model/model_final.pth', help='Checkpoint to load path from')
+parser.add_argument('-load_path', default='model/model_epoch_88.pth', help='Checkpoint to load path from')
 parser.add_argument('-num_output', default=64, help='Number of generated outputs')
 args = parser.parse_args()
 
@@ -41,5 +41,5 @@ with torch.no_grad():
 # Display the generated image.
 plt.axis("off")
 plt.title("Generated Images")
-plt.imshow(np.transpose(vutils.make_grid(generated_img, padding=2, normalize=True), (1,2,0)))
+plt.imshow(np.transpose(vutils.make_grid(generated_img, padding=2, normalize=True).cpu().numpy(), (1,2,0)))
 plt.savefig('/home/ubuntu/DCGAN-PyTorch/images/generated_images.png')
