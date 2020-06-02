@@ -16,6 +16,8 @@ random.seed(seed)
 torch.manual_seed(seed)
 print("Random Seed: ", seed)
 
+class_ = "airplane"
+
 # Parameters to define the model.
 params = {
     "bsize" : 256,# Batch size during training.
@@ -43,7 +45,7 @@ plt.axis("off")
 plt.title("Training Images")
 plt.imshow(np.transpose(vutils.make_grid(
     sample_batch[0].to(device)[ : 64], padding=2, normalize=True).cpu().numpy(), (1, 2, 0)))
-plt.savefig('/home/ubuntu/DCGAN-PyTorch/images/training_images.png')
+#plt.savefig('/home/ubuntu/DCGAN-PyTorch/images/training_images.png')
 
 # Create the generator.
 netG = Generator(params).to(device)
@@ -173,7 +175,7 @@ for epoch in range(params['nepochs']):
             'optimizerG' : optimizerG.state_dict(),
             'optimizerD' : optimizerD.state_dict(),
             'params' : params
-            }, 'model/model_epoch_{}.pth'.format(epoch))
+            }, 'model/model_epoch_{}_{}.pth'.format(epoch, class_))
 
 # Save the final trained model.
 torch.save({
@@ -192,12 +194,12 @@ plt.plot(D_losses,label="D")
 plt.xlabel("iterations")
 plt.ylabel("Loss")
 plt.legend()
-plt.savefig('/home/ubuntu/DCGAN-PyTorch/images/losses.png')
+# plt.savefig('/home/ubuntu/DCGAN-PyTorch/images/losses.png')
 
 # Animation showing the improvements of the generator.
 fig = plt.figure(figsize=(8,8))
 plt.axis("off")
 ims = [[plt.imshow(np.transpose(i.cpu().numpy(),(1,2,0)), animated=True)] for i in img_list]
 anim = animation.ArtistAnimation(fig, ims, interval=1000, repeat_delay=1000, blit=True)
-plt.savefig('/home/ubuntu/DCGAN-PyTorch/images/whatever.png')
+#plt.savefig('/home/ubuntu/DCGAN-PyTorch/images/whatever.png')
 anim.save('/home/ubuntu/DCGAN-PyTorch/images/output.gif', dpi=80, writer='imagemagick')
