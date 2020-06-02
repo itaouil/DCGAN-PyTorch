@@ -43,8 +43,7 @@ plt.axis("off")
 plt.title("Training Images")
 plt.imshow(np.transpose(vutils.make_grid(
     sample_batch[0].to(device)[ : 64], padding=2, normalize=True).cpu().numpy(), (1, 2, 0)))
-
-plt.show()
+plt.savefig('/home/ubuntu/DCGAN-PyTorch/images/training_images.png')
 
 # Create the generator.
 netG = Generator(params).to(device)
@@ -193,12 +192,12 @@ plt.plot(D_losses,label="D")
 plt.xlabel("iterations")
 plt.ylabel("Loss")
 plt.legend()
-plt.show()
+plt.savefig('/home/ubuntu/DCGAN-PyTorch/images/losses.png')
 
 # Animation showing the improvements of the generator.
 fig = plt.figure(figsize=(8,8))
 plt.axis("off")
 ims = [[plt.imshow(np.transpose(i.cpu().numpy(),(1,2,0)), animated=True)] for i in img_list]
 anim = animation.ArtistAnimation(fig, ims, interval=1000, repeat_delay=1000, blit=True)
-plt.show()
-anim.save('celeba.gif', dpi=80, writer='imagemagick')
+plt.savefig('/home/ubuntu/DCGAN-PyTorch/images/whatever.png')
+anim.save('/home/ubuntu/DCGAN-PyTorch/images/output.gif', dpi=80, writer='imagemagick')
