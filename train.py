@@ -198,7 +198,7 @@ plt.show()
 # Animation showing the improvements of the generator.
 fig = plt.figure(figsize=(8,8))
 plt.axis("off")
-ims = [[plt.imshow(np.transpose(i,(1,2,0)), animated=True)] for i in img_list]
+ims = [[plt.imshow(np.transpose(i.cpu().numpy(),(1,2,0)), animated=True)] for i in img_list]
 anim = animation.ArtistAnimation(fig, ims, interval=1000, repeat_delay=1000, blit=True)
 plt.show()
 anim.save('celeba.gif', dpi=80, writer='imagemagick')
